@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch</title>
+</head>
+<style>
+     @import url('https://fonts.cdnfonts.com/css/didot');
+    body {
+        font-family: 'Didot', sans-serif;
+        font-weight: 700;
+    }
+
+    #H {
+        font-size: 100px;
+        border: 2px solid #546326;
+        background-color: #dff9fb;
+        padding: 5px 10px;
+        color:#686de0 ;
+        border-radius: 10px;
+        background-color: #a2ebba;
+    }
+
+    #M {
+        font-size: 80px;
+        border: 2px solid #924d4adc;
+        background-color: #dff9fb;
+        padding: 5px 10px;
+        color: #299255;
+        border-radius: 10px;
+        background-color: #d6c3d096;
+
+
+    }
+
+    #Sec {
+        font-size: 60px;
+        border: 2px solid #40407a;
+        background-color: #e5c9f3e1;
+        padding: 5px 10px;
+        color: #ff6348;
+        border-radius: 10px;
+
+
+    }
+
+    #AM_PM {
+        font-size: 40px;
+        border: 2px solid #532434;
+        background-color: #bcdbe2ef;
+        text-shadow:-1px -2px 3px #081113;
+        padding: 5px 10px;
+        color: #3ae374;
+        border-radius: 10px;
+
+
+    }
+
+    #date {
+        font-size: 45px;
+        border: 2px solid #badc58;
+        background-color: #35695a;
+        padding: 5px 10px;
+        border-radius: 10px;
+        color: #c8d6e5;
+        text-align: center;
+        margin: 20px auto 5px auto;
+
+    }
+
+    #main {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #a5f1f665;
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px;
+    }
+    @media(max-width: 798px) {
+        #H{
+            width: 100%;
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+
+        }
+        #M{
+            width: 100%;
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+
+        }
+        #Sec{
+            width: 100%;
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+
+        }
+        #AM_PM{
+            width: 100%;
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .colon{
+            display: none;
+        }
+        #date{
+            font-size: 20px;
+            margin: auto;
+            margin-top: 10px;
+
+        }
+    }
+    @media(max-width:450px) {
+        #date{
+            font-size: 14px;
+           text-align:center;
+           border: none;
+           padding:5px;
+        }
+        #main {
+            padding:10%;
+        }
+    }
+
+</style>
+
+<body>
+    <div id="main">
+        <span id="Time"></span>
+        <span id="H"></span>
+        <span class="colon" style="font-size: 80px;">:</span>
+        <span id="M"></span>
+        <span class="colon" style="font-size: 60px;">:</span>
+        <span id="Sec"></span>
+        <span class="colon" style="font-size: 40px;">:</span>
+        <span id="AM_PM"></span>
+        <h5 id="date"></h5>
+    </div>
+    <script>
+        function MyDate() {
+            var myDate = new Date();
+            var min = (myDate.getMinutes() < 10) ? "0" + myDate.getMinutes() : myDate.getMinutes(),
+                hr = (myDate.getHours() < 10) ? "0" + myDate.getHours() : myDate.getHours(),
+                sec = (myDate.getSeconds() < 10) ? "0" + myDate.getSeconds() : myDate.getSeconds(),
+                AM_PM = (myDate.getHours() >= 12) ? "PM" : "AM";
+            if (myDate.getHours() == 0) {
+                hr = 12;
+            } else if (myDate.getHours() > 12) {
+                hr = myDate.getHours() - 12;
+            } else {
+                hr = myDate.getHours()
+            }
+            // pis pis
+            document.getElementById("H").innerHTML = hr;
+            document.getElementById("M").innerHTML = min;
+            document.getElementById("Sec").innerHTML = sec;
+            document.getElementById("AM_PM").innerHTML = AM_PM;
+
+
+            var correntTime = hr + ":" + min + ":" + sec + ":" + AM_PM;
+            // document.getElementById("Time").innerHTML = correntTime
+            // console.log(correntTime)
+            var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var month = ["January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"];
+            var correntDate = days[myDate.getDay()] + ", " + month[myDate.getMonth()];
+            document.getElementById("date").innerHTML = correntDate
+        }
+        MyDate()
+        setInterval(() => {
+            MyDate()
+        }, 1000)
+    </script>
+</body>
+
+</html>
